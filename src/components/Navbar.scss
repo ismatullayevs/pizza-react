@@ -1,0 +1,220 @@
+@import "variables";
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    padding: 15px 0;
+    font-size: 18px;
+
+    .fas {
+      font-size: 35px;
+      color: $primary;
+    }
+  }
+}
+
+.navbar.mobile {
+  width: 100%;
+
+  .signup {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    margin-bottom: 10px;
+
+    i {
+      font-size: 20px;
+      color: $primary;
+    }
+  }
+  .navbar__toggle {
+    position: relative;
+    box-sizing: content-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    padding: 20px;
+
+    &__bar {
+      width: 100%;
+      height: 2px;
+      background-color: $black;
+      transition: 0.2s linear;
+    }
+
+    &__bar.third {
+      width: 55%;
+    }
+
+    &.open {
+      .navbar__toggle__bar.first {
+        transform-origin: 10%;
+        transform: rotate(45deg);
+      }
+      .navbar__toggle__bar.second {
+        width: 0;
+      }
+      .navbar__toggle__bar.third {
+        width: 100%;
+        transform-origin: 10%;
+        transform: rotate(-45deg);
+      }
+    }
+  }
+  .navbar__dropdown {
+    background-color: white;
+    position: absolute;
+    inset: 0;
+    top: 92px;
+    width: 100vw;
+    z-index: 100;
+    padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    overflow-y: auto;
+
+    .navbar__links {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      padding-bottom: 20px;
+
+      .navbar__link {
+        padding: 5px 0;
+      }
+    }
+    .navbar__footer {
+      display: flex;
+      flex-direction: column;
+      row-gap: 10px;
+
+      i {
+        font-size: 20px;
+        color: $primary;
+      }
+
+      .phone,
+      .location {
+        display: flex;
+        column-gap: 15px;
+        align-items: center;
+      }
+      .social__apps {
+        display: flex;
+        column-gap: 20px;
+
+        .social__facebook,
+        .social__instagram {
+          display: flex;
+          align-items: center;
+          column-gap: 8px;
+        }
+      }
+    }
+  }
+}
+.space {
+  height: 1000px;
+}
+
+.dropdown__animate-enter {
+  transform: scale(0.7) translateX(-100vh);
+}
+
+.dropdown__animate-enter-active {
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.dropdown__animate-exit-active {
+  transform: scale(0.9) translateX(-100vh);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.desktop {
+  display: none;
+
+  .navbar {
+    max-width: $lg;
+    margin: 0 auto;
+
+    .navbar__links {
+      display: flex;
+      align-items: center;
+      column-gap: 25px;
+
+      .navbar__link {
+        position: relative;
+        padding: 18px 0;
+        overflow: hidden;
+        font-weight: medium;
+        transition: color 0.3s;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: calc(100% - 16px);
+          left: 0;
+          width: 100%;
+          height: 3px;
+          background-color: $primary;
+          border-radius: 50%;
+          transform: translateX(-100%);
+        }
+
+        &:hover {
+          color: $primary;
+        }
+        &:hover::before {
+          width: 100%;
+          animation-name: move;
+          animation-duration: 0.7s;
+
+          @keyframes move {
+            from {
+              transform: translateX(-100%);
+            }
+            to {
+              transform: translateX(100%);
+            }
+          }
+        }
+      }
+    }
+
+    .cart {
+      display: flex;
+      align-items: center;
+      column-gap: 5px;
+      padding: 5px 14px;
+      border-radius: 4px;
+      background: $primary;
+      color: white;
+      transition: 0.2s linear;
+
+      &:hover {
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+          rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+        transform: scale(1.03);
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $md) {
+  .mobile {
+    display: none !important;
+  }
+  .desktop {
+    display: block !important;
+  }
+}
